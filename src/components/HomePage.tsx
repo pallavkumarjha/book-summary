@@ -79,7 +79,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-beige-100 p-4">
       <h1 className="text-4xl md:text-6xl font-bold text-brown-800 mb-8">
-        Should I read it?
+        Should I read this?
       </h1>
       <form onSubmit={handleSearch} className="w-full max-w-md">
         <div className="relative">
