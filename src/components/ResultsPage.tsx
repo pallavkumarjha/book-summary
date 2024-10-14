@@ -6,8 +6,8 @@ const ResultsPage: React.FC = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get('q') || '';
-  const [bookData] = useState(JSON.parse(query).volumeInfo)
-  const [headline] = useState(JSON.parse(query).searchInfo.textSnippet)
+  const [bookData] = useState(JSON.parse(query).volumeInfo || '')
+  const [headline] = useState(JSON.parse(query).searchInfo.textSnippet || '')
 
   console.log(JSON.parse(query))
 
@@ -21,19 +21,19 @@ const ResultsPage: React.FC = () => {
       <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
         <div className="md:flex">
           <div className="md:flex-shrink-0 relative">
-            <img className="h-96 w-full object-cover md:w-80" src={bookData.imageLinks.thumbnail} alt={bookData.title} />
+            <img className="h-96 w-full object-cover md:w-80" src={bookData?.imageLinks?.thumbnail} alt={bookData.title} />
           </div>
           <div className="p-8 flex flex-col justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-brown-900 mb-2">{bookData.title}</h1>
-              <p className="text-xl text-brown-600 mb-4"> -- by {bookData.authors.map(a => a).join(', ')}</p>
-             {bookData.subtitle && (<div className="flex items-center mb-4">
+              <h1 className="text-4xl font-bold text-brown-900 mb-2">{bookData?.title}</h1>
+              <p className="text-xl text-brown-600 mb-4"> -- by {bookData?.authors?.map(a => a).join(', ')}</p>
+             {bookData?.subtitle && (<div className="flex items-center mb-4">
                 <SubtitlesIcon className='mr-2' />
-                <span className="text-brown-700">{bookData.subtitle}</span>
+                <span className="text-brown-700">{bookData?.subtitle}</span>
               </div>)}
               <div className="flex bottom-0 left-0 right-0">
                 <div className="flex text-sm font-semibold">
-                  <Calendar className='mr-2' /> {bookData.publishedDate}
+                  <Calendar className='mr-2' /> {bookData?.publishedDate}
                 </div>
               </div>
               <div className="flex items-center mt-8">
@@ -44,7 +44,7 @@ const ResultsPage: React.FC = () => {
         </div>
         <div className="p-8 border-t border-gray-200">
           <h2 className="text-3xl font-bold text-brown-900 mb-4">Summary</h2>
-          <p className="text-lg text-brown-700 leading-relaxed">{bookData.description}</p>
+          <p className="text-lg text-brown-700 leading-relaxed">{bookData?.description}</p>
         </div>
         <div className="p-8 border-t border-gray-200 bg-gradient-to-b from-white to-beige-100">
           <a
